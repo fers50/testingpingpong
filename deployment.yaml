@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-env
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: nodejs-env
+  template:
+    metadata:
+      name: nodejs-env
+      labels:
+        name: nodejs-env
+    spec:
+      containers:
+        - name: nodejs-env
+          image: fers50/testingnodejs:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: nodejs-env-config
